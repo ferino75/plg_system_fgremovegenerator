@@ -34,7 +34,7 @@ casual automated scanning).
 ## Features
 
 - Remove the generator meta tag completely, or replace it with custom text
-- Optional: also apply to the administrator backend
+- Optional: also remove/replace the generator meta tag in the administrator backend (the HTTP headers below are always removed everywhere when enabled, regardless of this setting)
 - Optional, independent toggles for `X-Powered-By`, `X-Generator`, `X-AspNet-Version`
 - Headers are removed on `onBeforeRespond` — right before Joomla sends the HTTP response, so nothing set later by a component, plugin, or template slips through
 - PSR-4, `SubscriberInterface`, DI container (`services/provider.php`)

@@ -1,5 +1,8 @@
 # Changelog – plg_system_fgremovegenerator
 
+## 1.4.1 (2026-08-26)
+- Clarified that "Apply generator setting to Administrator" (renamed from "Apply in administrator") only controls the generator meta tag — the X-Powered-By / X-Generator / X-AspNet-Version headers are, and always were, removed everywhere (including the administrator) once their individual toggles are enabled. This is a documentation/labeling fix only; behavior is unchanged.
+
 ## 1.4.0 (2026-08-26)
 - **Fix (high priority):** moved fingerprinting-header removal from `onAfterInitialise` to `onBeforeRespond`. `onAfterInitialise` fires very early in the request lifecycle — routing, the component, the template, or another plugin can all still set/re-set `X-Powered-By`, `X-Generator`, etc. *after* that point, so the plugin could not actually guarantee removal. `onBeforeRespond` fires immediately before Joomla sends the HTTP response, which is the correct place to guarantee the header is gone.
 - Removed the `onAfterInitialise` event subscription entirely (no longer needed — `onBeforeRespond` replaces it, not supplements it)
