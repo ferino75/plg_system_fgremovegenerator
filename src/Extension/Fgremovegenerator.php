@@ -14,13 +14,17 @@ defined('_JEXEC') or die;
 
 use Joomla\CMS\Application\CMSApplicationInterface;
 use Joomla\CMS\Document\HtmlDocument;
+use Joomla\CMS\Event\Application\BeforeCompileHeadEvent;
+use Joomla\CMS\Event\Application\BeforeRespondEvent;
 use Joomla\CMS\Plugin\CMSPlugin;
-use Joomla\Event\EventInterface;
 use Joomla\Event\SubscriberInterface;
 
 /**
  * Removes the Joomla generator meta tag and optional fingerprinting HTTP headers
  * (X-Powered-By, X-Generator, X-AspNet-Version).
+ *
+ * Requires Joomla 5.0+ (uses the concrete Application event classes introduced
+ * in Joomla 5.0.0; these do not exist in Joomla 4).
  */
 final class Fgremovegenerator extends CMSPlugin implements SubscriberInterface
 {
@@ -38,7 +42,7 @@ final class Fgremovegenerator extends CMSPlugin implements SubscriberInterface
      * so that headers set later by any component, plugin or template cannot
      * slip through after this plugin already ran.
      */
-    public function onBeforeRespond(EventInterface $event): void
+    public function onBeforeRespond(BeforeRespondEvent $event): void
     {
         if (headers_sent()) {
             return;
@@ -57,9 +61,9 @@ final class Fgremovegenerator extends CMSPlugin implements SubscriberInterface
         }
     }
 
-    public function onBeforeCompileHead(EventInterface $event): void
+    public function onBeforeCompileHead(BeforeCompileHeadEvent $event): void
     {
-        $app = $this->getApplication();
+        $app = $event->getApplication();
 
         if (!$app instanceof CMSApplicationInterface) {
             return;
@@ -74,7 +78,7 @@ final class Fgremovegenerator extends CMSPlugin implements SubscriberInterface
             return;
         }
 
-        $document = $app->getDocument();
+        $document = $event->getDocument();
 
         if (!$document instanceof HtmlDocument) {
             return;

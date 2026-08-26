@@ -5,13 +5,13 @@
 <h1 align="center">FG - Remove Generator</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Joomla-4%20%7C%205%20%7C%206-1a6877?logo=joomla&logoColor=white" alt="Joomla 4/5/6">
-  <img src="https://img.shields.io/badge/PHP-%3E%3D8.0-777bb4?logo=php&logoColor=white" alt="PHP 8.0+">
+  <img src="https://img.shields.io/badge/Joomla-5%20%7C%206-1a6877?logo=joomla&logoColor=white" alt="Joomla 5/6">
+  <img src="https://img.shields.io/badge/PHP-%3E%3D8.1-777bb4?logo=php&logoColor=white" alt="PHP 8.1+">
   <img src="https://img.shields.io/github/v/tag/ferino75/plg_system_fgremovegenerator?label=version&color=ff6b4a" alt="Version">
   <img src="https://img.shields.io/badge/license-GPL--2.0--or--later-blue" alt="License">
 </p>
 
-A native Joomla 4/5/6 system plugin that removes the Joomla **generator meta tag**
+A native Joomla 5/6 system plugin that removes the Joomla **generator meta tag**
 (`<meta name="generator" content="Joomla! - Open Source Content Management">`) and,
 optionally, common **fingerprinting HTTP response headers**:
 
@@ -38,6 +38,7 @@ casual automated scanning).
 - Optional, independent toggles for `X-Powered-By`, `X-Generator`, `X-AspNet-Version`
 - Headers are removed on `onBeforeRespond` — right before Joomla sends the HTTP response, so nothing set later by a component, plugin, or template slips through
 - PSR-4, `SubscriberInterface`, DI container (`services/provider.php`)
+- Uses concrete, typed Joomla event classes (`BeforeCompileHeadEvent`, `BeforeRespondEvent`) instead of the generic `EventInterface` — requires Joomla 5.0+, not compatible with Joomla 4
 - English + Slovak (sk-SK) language files
 
 ## Installation

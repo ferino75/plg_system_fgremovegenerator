@@ -1,5 +1,11 @@
 # Changelog – plg_system_fgremovegenerator
 
+## 1.5.0 (2026-08-26)
+- **Breaking / platform change:** dropped Joomla 4 support. `updates.xml` targetplatform narrowed from `[456]` to `[56]`.
+- Switched from the generic `Joomla\Event\EventInterface` to the concrete, typed Joomla event classes `Joomla\CMS\Event\Application\BeforeCompileHeadEvent` and `Joomla\CMS\Event\Application\BeforeRespondEvent` (confirmed via the official Joomla 6.0.x API docs: both classes exist `since 5.0.0`, i.e. not available in Joomla 4). This gives explicit typed arguments (`$event->getApplication()`, `$event->getDocument()`), better static analysis, and better IDE autocomplete, at the cost of Joomla 4 compatibility.
+- `onBeforeCompileHead` now reads the application/document from the event instead of `$this->getApplication()`.
+- Raised `<php_minimum>` from `8.0.0` to `8.1.0` (Joomla 5/6 baseline).
+
 ## 1.4.1 (2026-08-26)
 - Clarified that "Apply generator setting to Administrator" (renamed from "Apply in administrator") only controls the generator meta tag — the X-Powered-By / X-Generator / X-AspNet-Version headers are, and always were, removed everywhere (including the administrator) once their individual toggles are enabled. This is a documentation/labeling fix only; behavior is unchanged.
 
