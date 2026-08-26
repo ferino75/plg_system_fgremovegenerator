@@ -27,16 +27,18 @@ final class Fgremovegenerator extends CMSPlugin implements SubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            'onAfterInitialise'   => 'onAfterInitialise',
             'onBeforeCompileHead' => 'onBeforeCompileHead',
+            'onBeforeRespond'     => 'onBeforeRespond',
         ];
     }
 
     /**
-     * Removes selected fingerprinting HTTP headers as early as possible in the
-     * application lifecycle, before headers have been sent to the client.
+     * Removes selected fingerprinting HTTP headers as late as possible in the
+     * application lifecycle — right before Joomla sends the HTTP response —
+     * so that headers set later by any component, plugin or template cannot
+     * slip through after this plugin already ran.
      */
-    public function onAfterInitialise(EventInterface $event): void
+    public function onBeforeRespond(EventInterface $event): void
     {
         if (headers_sent()) {
             return;

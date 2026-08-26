@@ -1,12 +1,18 @@
 # Changelog – plg_system_fgremovegenerator
 
+## 1.4.0 (2026-08-26)
+- **Fix (high priority):** moved fingerprinting-header removal from `onAfterInitialise` to `onBeforeRespond`. `onAfterInitialise` fires very early in the request lifecycle — routing, the component, the template, or another plugin can all still set/re-set `X-Powered-By`, `X-Generator`, etc. *after* that point, so the plugin could not actually guarantee removal. `onBeforeRespond` fires immediately before Joomla sends the HTTP response, which is the correct place to guarantee the header is gone.
+- Removed the `onAfterInitialise` event subscription entirely (no longer needed — `onBeforeRespond` replaces it, not supplements it)
+- Updated README wording that previously (incorrectly) described early removal as the stronger approach
+
 ## 1.3.0 (2026-08-26)
 - Rebranded into the FG series as `plg_system_fgremovegenerator`
 - Namespace changed to `FG\Plugin\System\Fgremovegenerator`, class renamed to `Fgremovegenerator`
 - Added `declare(strict_types=1)`; `onAfterInitialise`/`onBeforeCompileHead` now type-hinted against `Joomla\Event\EventInterface` instead of the concrete `Event` class
 - Added `<updateservers>` block (points at `updates.xml` on the `master` branch of `ferino75/plg_system_fgremovegenerator`), with `<client>site</client>` declared on the plugin's `<update>` entry
 - Declared `<php_minimum>8.0.0</php_minimum>`
-- Added GitHub-ready repo scaffolding: README.md with shields.io badges, LICENSE (GPL-2.0-or-later), .gitignore, assets/logo.png (teal/coral FG brand style) + its generation script
+- Added GitHub-ready repo scaffolding: README.md with shields.io badges, LICENSE (GPL-2.0-or-later), .gitignore, assets/logo.png (navy/coral FG brand style, colors sampled from plg_fgeditorswitcher) + its generation script
+- Fixed logo colors to match the actual FG brand (navy gradient #081D32→#113758, coral #FF6B4A) after the first draft used the wrong palette
 - No functional/behavioral change to header or meta-tag removal logic
 
 ## 1.2.0 (2026-07-27)
