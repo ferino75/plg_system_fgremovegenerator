@@ -2,7 +2,7 @@
   <img src="assets/logo.png" alt="FG Remove Generator logo" width="128" height="128">
 </p>
 
-<h1 align="center">FG - Remove Generator</h1>
+<h1 align="center">FG Remove Generator</h1>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Joomla-5%20%7C%206-1a6877?logo=joomla&logoColor=white" alt="Joomla 5/6">
