@@ -1,16 +1,15 @@
 """
-FG brand logo generator for plg_system_fgremovegenerator.
-Teal squircle background (#105060 -> #1A6877 gradient), coral (#FF6B4A) accent.
-Motif: a "tag" shape (meta/generator tag) with a coral "no/remove" slash - representing
-removal of the generator meta tag / fingerprinting headers.
-Flat rendering, no drop shadow (per FG standalone-logo convention), strictly binary alpha.
+FG brand logo generator for plg_system_fgremovegenerator (v2 - correct brand colors,
+sampled from ferino75/plg_fgeditorswitcher/assets/logo.png).
+Navy gradient background (#081D32 -> #113758), coral (#FF6B4A) accent.
+Motif: a "tag" shape (meta/generator tag) with a coral "no/remove" prohibition slash.
 """
 from PIL import Image, ImageDraw
 import math
 
 SIZE = 512
-TEAL_TOP = (16, 80, 96)      # #105060
-TEAL_BOTTOM = (26, 104, 119) # #1A6877
+NAVY_TOP = (8, 29, 50)       # #081D32
+NAVY_BOTTOM = (17, 55, 88)   # #113758
 CORAL = (255, 107, 74)       # #FF6B4A
 WHITE = (255, 255, 255)
 
@@ -31,7 +30,7 @@ def make_gradient(size, top, bottom):
     return grad.resize((size, size))
 
 def main():
-    bg = make_gradient(SIZE, TEAL_TOP, TEAL_BOTTOM).convert("RGBA")
+    bg = make_gradient(SIZE, NAVY_TOP, NAVY_BOTTOM).convert("RGBA")
     mask = rounded_rect_mask(SIZE, radius=100)
 
     canvas = Image.new("RGBA", (SIZE, SIZE), (0, 0, 0, 0))
@@ -42,7 +41,6 @@ def main():
     # --- Tag icon (meta/generator tag motif) ---
     cx, cy = SIZE * 0.42, SIZE * 0.52
     tag_w, tag_h = 200, 140
-    # Tag body: rounded rect with a pointed left notch (classic price/meta tag shape)
     pts = [
         (cx - tag_w/2 + 40, cy - tag_h/2),
         (cx + tag_w/2, cy - tag_h/2),
@@ -51,21 +49,19 @@ def main():
         (cx - tag_w/2, cy),
     ]
     draw.polygon(pts, fill=WHITE)
-    # small hole in the tag
     hole_r = 14
     hole_cx, hole_cy = cx - tag_w/2 + 62, cy
     draw.ellipse(
         [hole_cx - hole_r, hole_cy - hole_r, hole_cx + hole_r, hole_cy + hole_r],
-        fill=TEAL_TOP
+        fill=NAVY_TOP
     )
 
-    # --- Coral "no/remove" prohibition ring + slash, overlapping bottom-right of tag ---
+    # --- Coral "no/remove" prohibition ring + slash ---
     ring_cx, ring_cy = SIZE * 0.64, SIZE * 0.66
     ring_r = 92
     ring_width = 26
     bbox = [ring_cx - ring_r, ring_cy - ring_r, ring_cx + ring_r, ring_cy + ring_r]
     draw.ellipse(bbox, outline=CORAL, width=ring_width)
-    # diagonal slash through the ring (45 degrees)
     slash_len = ring_r * 1.35
     angle = math.radians(45)
     dx = slash_len * math.cos(angle)
@@ -75,14 +71,12 @@ def main():
         fill=CORAL, width=ring_width
     )
 
-    # Ensure strictly binary alpha (no soft edges bleeding outside the squircle mask)
     r, g, b, a = canvas.split()
     a = a.point(lambda p: 255 if p > 127 else 0)
     canvas = Image.merge("RGBA", (r, g, b, a))
 
-    canvas.save("/home/claude/fgremovegenerator_build/logo.png")
-    canvas.resize((256, 256), Image.LANCZOS).save("/home/claude/fgremovegenerator_build/logo_256.png")
-    print("Logo generated.")
+    canvas.save("/home/claude/fgremovegenerator_build/logo_v2.png")
+    print("Logo v2 generated.")
 
 if __name__ == "__main__":
     main()
