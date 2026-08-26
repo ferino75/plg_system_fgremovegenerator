@@ -17,7 +17,6 @@ optionally, common **fingerprinting HTTP response headers**:
 
 - `X-Powered-By` (sent by PHP)
 - `X-Generator` (sometimes sent by templates/extensions)
-- `X-AspNet-Version` (not applicable on a PHP stack, included for completeness)
 
 ## Why
 
@@ -35,7 +34,7 @@ casual automated scanning).
 
 - Remove the generator meta tag completely, or replace it with custom text
 - Optional: also remove/replace the generator meta tag in the administrator backend (the HTTP headers below are always removed everywhere when enabled, regardless of this setting)
-- Optional, independent toggles for `X-Powered-By`, `X-Generator`, `X-AspNet-Version`
+- Optional, independent toggles for `X-Powered-By`, `X-Generator`
 - Headers are removed on `onBeforeRespond` — right before Joomla sends the HTTP response, so nothing set later by a component, plugin, or template slips through
 - PSR-4, `SubscriberInterface`, DI container (`services/provider.php`)
 - Uses concrete, typed Joomla event classes (`BeforeCompileHeadEvent`, `BeforeRespondEvent`) instead of the generic `EventInterface` — requires Joomla 5.0+, not compatible with Joomla 4

@@ -5,7 +5,7 @@
     <creationDate>2026-07</creationDate>
     <copyright>(C) 2026 Fero</copyright>
     <license>GNU General Public License version 2 or later</license>
-    <version>1.5.0</version>
+    <version>1.5.1</version>
     <description>PLG_SYSTEM_FGREMOVEGENERATOR_XML_DESCRIPTION</description>
     <namespace path="src">FG\Plugin\System\Fgremovegenerator</namespace>
     <files>
@@ -77,17 +77,6 @@
                     layout="joomla.form.field.radio.switcher"
                     label="PLG_SYSTEM_FGREMOVEGENERATOR_REMOVE_XGEN_LABEL"
                     description="PLG_SYSTEM_FGREMOVEGENERATOR_REMOVE_XGEN_DESC"
-                    default="0"
-                >
-                    <option value="0">JNO</option>
-                    <option value="1">JYES</option>
-                </field>
-                <field
-                    name="remove_x_aspnet_version"
-                    type="radio"
-                    layout="joomla.form.field.radio.switcher"
-                    label="PLG_SYSTEM_FGREMOVEGENERATOR_REMOVE_XASPNET_LABEL"
-                    description="PLG_SYSTEM_FGREMOVEGENERATOR_REMOVE_XASPNET_DESC"
                     default="0"
                 >
                     <option value="0">JNO</option>

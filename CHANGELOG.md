@@ -1,5 +1,8 @@
 # Changelog – plg_system_fgremovegenerator
 
+## 1.5.1 (2026-08-26)
+- **Removed the `X-AspNet-Version` toggle entirely** (field, PHP logic, language strings, README). It never applied to a PHP/Joomla stack in the first place; where such a header does appear, it's typically added by IIS, a reverse proxy, or another upstream layer *after* PHP has finished, so `header_remove()` could not reliably remove it. Keeping a toggle that may silently do nothing was misleading — the plugin now only offers controls for headers Joomla/PHP can actually influence: the generator meta tag, `X-Powered-By`, and `X-Generator`.
+
 ## 1.5.0 (2026-08-26)
 - **Breaking / platform change:** dropped Joomla 4 support. `updates.xml` targetplatform narrowed from `[456]` to `[56]`.
 - Switched from the generic `Joomla\Event\EventInterface` to the concrete, typed Joomla event classes `Joomla\CMS\Event\Application\BeforeCompileHeadEvent` and `Joomla\CMS\Event\Application\BeforeRespondEvent` (confirmed via the official Joomla 6.0.x API docs: both classes exist `since 5.0.0`, i.e. not available in Joomla 4). This gives explicit typed arguments (`$event->getApplication()`, `$event->getDocument()`), better static analysis, and better IDE autocomplete, at the cost of Joomla 4 compatibility.

@@ -21,7 +21,7 @@ use Joomla\Event\SubscriberInterface;
 
 /**
  * Removes the Joomla generator meta tag and optional fingerprinting HTTP headers
- * (X-Powered-By, X-Generator, X-AspNet-Version).
+ * (X-Powered-By, X-Generator).
  *
  * Requires Joomla 5.0+ (uses the concrete Application event classes introduced
  * in Joomla 5.0.0; these do not exist in Joomla 4).
@@ -49,9 +49,8 @@ final class Fgremovegenerator extends CMSPlugin implements SubscriberInterface
         }
 
         $headersToRemove = [
-            'remove_x_powered_by'     => 'X-Powered-By',
-            'remove_x_generator'      => 'X-Generator',
-            'remove_x_aspnet_version' => 'X-AspNet-Version',
+            'remove_x_powered_by' => 'X-Powered-By',
+            'remove_x_generator'  => 'X-Generator',
         ];
 
         foreach ($headersToRemove as $param => $header) {
