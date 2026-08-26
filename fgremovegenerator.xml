@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="system" method="upgrade">
+    <name>plg_system_fgremovegenerator</name>
+    <author>Fero</author>
+    <creationDate>2026-07</creationDate>
+    <copyright>(C) 2026 Fero</copyright>
+    <license>GNU General Public License version 2 or later</license>
+    <version>1.3.0</version>
+    <description>PLG_SYSTEM_FGREMOVEGENERATOR_XML_DESCRIPTION</description>
+    <namespace path="src">FG\Plugin\System\Fgremovegenerator</namespace>
+    <files>
+        <folder plugin="fgremovegenerator">services</folder>
+        <folder>src</folder>
+        <folder>language</folder>
+    </files>
+    <languages>
+        <language tag="en-GB">language/en-GB/plg_system_fgremovegenerator.ini</language>
+        <language tag="en-GB">language/en-GB/plg_system_fgremovegenerator.sys.ini</language>
+        <language tag="sk-SK">language/sk-SK/plg_system_fgremovegenerator.ini</language>
+        <language tag="sk-SK">language/sk-SK/plg_system_fgremovegenerator.sys.ini</language>
+    </languages>
+    <php_minimum>8.0.0</php_minimum>
+    <updateservers>
+        <server type="extension" priority="1" name="FG Remove Generator">https://raw.githubusercontent.com/ferino75/plg_system_fgremovegenerator/master/updates.xml</server>
+    </updateservers>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field
+                    name="mode"
+                    type="list"
+                    label="PLG_SYSTEM_FGREMOVEGENERATOR_MODE_LABEL"
+                    description="PLG_SYSTEM_FGREMOVEGENERATOR_MODE_DESC"
+                    default="remove"
+                >
+                    <option value="remove">PLG_SYSTEM_FGREMOVEGENERATOR_MODE_REMOVE</option>
+                    <option value="custom">PLG_SYSTEM_FGREMOVEGENERATOR_MODE_CUSTOM</option>
+                </field>
+                <field
+                    name="custom_text"
+                    type="text"
+                    label="PLG_SYSTEM_FGREMOVEGENERATOR_CUSTOM_TEXT_LABEL"
+                    description="PLG_SYSTEM_FGREMOVEGENERATOR_CUSTOM_TEXT_DESC"
+                    default=""
+                    showon="mode:custom"
+                />
+                <field
+                    name="apply_admin"
+                    type="radio"
+                    layout="joomla.form.field.radio.switcher"
+                    label="PLG_SYSTEM_FGREMOVEGENERATOR_APPLY_ADMIN_LABEL"
+                    description="PLG_SYSTEM_FGREMOVEGENERATOR_APPLY_ADMIN_DESC"
+                    default="0"
+                >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                    name="remove_x_powered_by"
+                    type="radio"
+                    layout="joomla.form.field.radio.switcher"
+                    label="PLG_SYSTEM_FGREMOVEGENERATOR_REMOVE_XPB_LABEL"
+                    description="PLG_SYSTEM_FGREMOVEGENERATOR_REMOVE_XPB_DESC"
+                    default="1"
+                >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+            </fieldset>
+            <fieldset
+                name="headers"
+                label="PLG_SYSTEM_FGREMOVEGENERATOR_FIELDSET_HEADERS"
+            >
+                <field
+                    name="remove_x_generator"
+                    type="radio"
+                    layout="joomla.form.field.radio.switcher"
+                    label="PLG_SYSTEM_FGREMOVEGENERATOR_REMOVE_XGEN_LABEL"
+                    description="PLG_SYSTEM_FGREMOVEGENERATOR_REMOVE_XGEN_DESC"
+                    default="0"
+                >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+                <field
+                    name="remove_x_aspnet_version"
+                    type="radio"
+                    layout="joomla.form.field.radio.switcher"
+                    label="PLG_SYSTEM_FGREMOVEGENERATOR_REMOVE_XASPNET_LABEL"
+                    description="PLG_SYSTEM_FGREMOVEGENERATOR_REMOVE_XASPNET_DESC"
+                    default="0"
+                >
+                    <option value="0">JNO</option>
+                    <option value="1">JYES</option>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
+</extension>
