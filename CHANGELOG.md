@@ -1,5 +1,8 @@
 # Changelog – plg_system_fgremovegenerator
 
+## 1.5.2 (2026-08-26)
+- Moved "Remove X-Powered-By header" from the `basic` fieldset into the `headers` fieldset, alongside "Remove X-Generator header". All three header toggles now live together, separate from the generator-meta-tag settings — UX/organization fix only, no behavior change.
+
 ## 1.5.1 (2026-08-26)
 - **Removed the `X-AspNet-Version` toggle entirely** (field, PHP logic, language strings, README). It never applied to a PHP/Joomla stack in the first place; where such a header does appear, it's typically added by IIS, a reverse proxy, or another upstream layer *after* PHP has finished, so `header_remove()` could not reliably remove it. Keeping a toggle that may silently do nothing was misleading — the plugin now only offers controls for headers Joomla/PHP can actually influence: the generator meta tag, `X-Powered-By`, and `X-Generator`.
 

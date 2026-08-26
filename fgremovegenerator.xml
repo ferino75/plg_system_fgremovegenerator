@@ -5,7 +5,7 @@
     <creationDate>2026-07</creationDate>
     <copyright>(C) 2026 Fero</copyright>
     <license>GNU General Public License version 2 or later</license>
-    <version>1.5.1</version>
+    <version>1.5.2</version>
     <description>PLG_SYSTEM_FGREMOVEGENERATOR_XML_DESCRIPTION</description>
     <namespace path="src">FG\Plugin\System\Fgremovegenerator</namespace>
     <files>
@@ -55,6 +55,11 @@
                     <option value="0">JNO</option>
                     <option value="1">JYES</option>
                 </field>
+            </fieldset>
+            <fieldset
+                name="headers"
+                label="PLG_SYSTEM_FGREMOVEGENERATOR_FIELDSET_HEADERS"
+            >
                 <field
                     name="remove_x_powered_by"
                     type="radio"
@@ -66,11 +71,6 @@
                     <option value="0">JNO</option>
                     <option value="1">JYES</option>
                 </field>
-            </fieldset>
-            <fieldset
-                name="headers"
-                label="PLG_SYSTEM_FGREMOVEGENERATOR_FIELDSET_HEADERS"
-            >
                 <field
                     name="remove_x_generator"
                     type="radio"
